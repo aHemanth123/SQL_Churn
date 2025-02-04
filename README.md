@@ -84,7 +84,7 @@ This repository contains SQL queries used to analyze customer churn in a telecom
     FROM  [dbo].[telcom_clean_data#csv$]
     GROUP BY City
     ORDER BY ChurnRate DESC;
-
+- This query finds cities with the highest churn rate.
 
 ###  Scenario  7 : Impact of Paperless Billing on Churn
 
@@ -97,10 +97,11 @@ This repository contains SQL queries used to analyze customer churn in a telecom
     GROUP BY [Paperless Billing]
     ORDER BY ChurnRate DESC;
     
-- This query finds cities with the highest churn rate.
-
+ 
 - This query assesses the impact of paperless billing on customer churn.
 
 ###  Scenario  8 : Customer Lifetime Value (CLTV) Segmentation
+
+
 
 - This query categorizes customers based on their Customer Lifetime Value (CLTV)
