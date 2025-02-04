@@ -100,7 +100,25 @@ This repository contains SQL queries used to analyze customer churn in a telecom
  
 - This query assesses the impact of paperless billing on customer churn.
 
+
 ###  Scenario  8 : Customer Lifetime Value (CLTV) Segmentation
+
+    SELECT 
+     CASE 
+        WHEN CLTV > 5000 THEN 'High Value'
+        WHEN CLTV BETWEEN 2000 AND 5000 THEN 'Medium Value'
+        ELSE 'Low Value'
+      END AS CLTV_Segment, 
+      COUNT(*) AS CustomerCount
+      FROM  [dbo].[telcom_clean_data#csv$]
+    GROUP BY 
+      CASE 
+        WHEN CLTV > 5000 THEN 'High Value'
+        WHEN CLTV BETWEEN 2000 AND 5000 THEN 'Medium Value'
+        ELSE 'Low Value'
+       END
+    ORDER BY CustomerCount DESC;
+
 
 
 
