@@ -5,8 +5,11 @@
 This repository contains SQL queries used to analyze customer churn in a telecom dataset. The dataset is stored in a database table named telcom_clean_data#csv$. The queries provide insights into churn rate, revenue contribution, and factors influencing customer churn.
 
 ## SQL Queries and Insights
-
 ### Scenario 1 :  Analyze Churn Rate
+
+
+      SELECT ROUND(COUNT(CASE WHEN Churn = 1 THEN 1 END) * 100.0 / COUNT(*),  2) AS Churn_Rate FROM  [dbo].[telcom_clean_data#csv$] ;
+
 This query calculates the percentage of customers who have churned.
 
 
