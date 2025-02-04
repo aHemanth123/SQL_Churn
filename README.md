@@ -15,6 +15,8 @@ This repository contains SQL queries used to analyze customer churn in a telecom
 
 ###  Scenario 2 : Top Cities with Highest Churn Rate
 
+     SELECT City, COUNT(*) AS Churned_Customers, (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM  [dbo].[telcom_clean_data#csv$]  WHERE Churn = 1)) AS Churn_Percentage FROM  [dbo].[telcom_clean_data#csv$]WHERE Churn = 1 GROUP BY City HAVING COUNT  (*) > 0ORDER BY Churn_Percentage DESC
+
 - This query identifies the cities with the highest churn rate.
 
 
