@@ -19,6 +19,7 @@ This repository contains SQL queries used to analyze customer churn in a telecom
      SELECT City, COUNT(*) AS Churned_Customers,
        (COUNT(*) * 100.0 /   (SELECT COUNT(*) 
          FROM  [dbo].[telcom_clean_data#csv$]  WHERE Churn = 1)) AS Churn_Percentage 
+	 
      FROM  [dbo].[telcom_clean_data#csv$]
      WHERE Churn = 1 GROUP BY City HAVING COUNT  (*) > 0ORDER BY Churn_Percentage DESC;  
 - This query identifies the cities with the highest churn rate.
@@ -52,6 +53,7 @@ This repository contains SQL queries used to analyze customer churn in a telecom
     SELECT [Online Security], COUNT(*) AS Total_Customers,
     SUM(CASE WHEN Churn = 1 THEN 1 ELSE 0 END) AS    Churned_Customers,
     (SUM(CASE WHEN Churn = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS Churn_Rate
+    
     FROM [dbo].[telcom_clean_data#csv$]
     GROUP BY [Online Security]
     HAVING [Online Security] IS NOT NULL
@@ -65,6 +67,7 @@ This repository contains SQL queries used to analyze customer churn in a telecom
    
     SELECT [Contract], COUNT(*) AS Total_Customers,
     AVG([Monthly Charge]) AS Avg_Monthly_Charge
+    
     FROM [dbo].[telcom_clean_data#csv$]
     WHERE [Monthly Charge] IS NOT NULL
     GROUP BY [Contract]
@@ -74,9 +77,27 @@ This repository contains SQL queries used to analyze customer churn in a telecom
 
 ###  Scenario 6  :  Identify Regions (Cities) with the Highest Churn
 
-- This query finds cities with the highest churn rate.
+    SELECT  City, COUNT(CASE WHEN Churn = 1 THEN 1 END) AS ChurnedCustomers,
+    COUNT(*) AS TotalCustomers,
+    (COUNT(CASE WHEN Churn = 1 THEN 1 END) * 100.0 / COUNT(*)) AS ChurnRate
+    
+    FROM  [dbo].[telcom_clean_data#csv$]
+    GROUP BY City
+    ORDER BY ChurnRate DESC;
+
 
 ###  Scenario  7 : Impact of Paperless Billing on Churn
+
+    SELECT  [Paperless Billing],
+    COUNT(CASE WHEN Churn = 1 THEN 1 END) AS ChurnedCustomers,
+    COUNT(*) AS TotalCustomers,
+    (COUNT(CASE WHEN Churn = 1 THEN 1 END) * 100.0 / COUNT(*)) AS ChurnRate
+    
+    FROM  [dbo].[telcom_clean_data#csv$]
+    GROUP BY [Paperless Billing]
+    ORDER BY ChurnRate DESC;
+    
+- This query finds cities with the highest churn rate.
 
 - This query assesses the impact of paperless billing on customer churn.
 
